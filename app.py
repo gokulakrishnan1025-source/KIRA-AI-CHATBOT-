@@ -505,8 +505,8 @@ model = st.selectbox(
 )
 st.session_state.model = model
 st.caption(f"📖 {config['docs']}")
-        
-        with st.expander("🎛️ Model Parameters", expanded=False):
+   
+with st.expander("🎛️ Model Parameters", expanded=False):
             st.session_state.temperature = st.slider(
                 "Temperature", 0.0, 2.0, st.session_state.temperature, 0.1)
             st.session_state.max_tokens = st.slider(
