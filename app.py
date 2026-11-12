@@ -864,7 +864,7 @@ def render_about():
     </div>
     """, unsafe_allow_html=True)
 
-return api_key
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # MAIN
