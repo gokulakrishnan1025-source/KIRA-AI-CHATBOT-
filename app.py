@@ -11,7 +11,7 @@ import streamlit.components.v1 as components
 import requests
 import json
 import time
-import base64
+import base
 from datetime import datetime
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -499,8 +499,8 @@ except Exception:
         placeholder=f"Enter your {config['key_name']}...",
         help=config["docs"]
     )
-            model = st.selectbox(
-                "Model", config["models"],
+model = st.selectbox(
+          "Model", config["models"],
                 index=config["models"].index(st.session_state.model) if st.session_state.model in config["models"] else 0
             )
             st.session_state.model = model
