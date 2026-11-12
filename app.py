@@ -540,7 +540,7 @@ with st.expander("📤 Export Chat", expanded=False):
                 with c3:
                     st.download_button("JSON", export_chat_json(st.session_state.messages),
                                        f"kira_{datetime.now().strftime('%Y%m%d')}.json", use_container_width=True)
-           else:
+            else:
                 st.info("Start a chat to export")
 
         st.divider()
