@@ -426,10 +426,10 @@ def export_chat_json(messages):
 def render_sidebar():
     with st.sidebar:
         st.markdown("""
-        <div style="text-align:center;padding:1rem 0;">
-            <h1 style="font-size:2rem;margin:0;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🤖 KIRA</h1>
-            <p style="font-size:0.8rem;opacity:0.6;margin:0;">AI Chatbot v2.0</p>
-        </div>
+            <div style="text-align:center;padding:1rem 0;">
+                <h1 style="font-size:2rem;margin:0;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🤖 KIRA</h1>
+                <p style="font-size:0.8rem;opacity:0.6;margin:0;">AI Chatbot v2.0</p>
+            </div>
         """, unsafe_allow_html=True)
         st.divider()
 
@@ -452,8 +452,7 @@ def render_sidebar():
             col1, col2 = st.columns([0.85, 0.15])
             with col1:
                 btn_type = "primary" if is_active else "secondary"
-                if st.button(f"{'▸ ' if is_active else ''}{title[:25]}{'...' if len(title) > 25 else ''}",
-                             key=f"chat_{chat_id}", use_container_width=True, type=btn_type):
+                if st.button(f"{'▸ ' if is_active else ''}{title[:25]}{'...' if len(title) > 25 else ''}", key=f"chat_{chat_id}", use_container_width=True, type=btn_type):
                     save_current_chat()
                     load_chat(chat_id)
                     st.rerun()
@@ -474,7 +473,7 @@ def render_sidebar():
             st.session_state.voice_enabled = st.toggle("🔊 Auto Voice Output", value=st.session_state.voice_enabled)
             st.session_state.voice_mode = st.toggle("🎙️ Voice Input Mode", value=st.session_state.voice_mode)
 
-            with st.expander("🔑 API Configuration", expanded=True):
+        with st.expander("🔑 API Configuration", expanded=True):
             provider = st.selectbox(
                 "AI Provider",
                 list(MODEL_CONFIGS.keys()),
@@ -506,10 +505,8 @@ def render_sidebar():
             st.caption(f"📖 {config['docs']}")
 
         with st.expander("🎛️ Model Parameters", expanded=False):
-            st.session_state.temperature = st.slider(
-                "Temperature", 0.0, 2.0, st.session_state.temperature, 0.1)
-            st.session_state.max_tokens = st.slider(
-                "Max Tokens", 256, 4096, st.session_state.max_tokens, 256)
+            st.session_state.temperature = st.slider("Temperature", 0.0, 2.0, st.session_state.temperature, 0.1)
+            st.session_state.max_tokens = st.slider("Max Tokens", 256, 4096, st.session_state.max_tokens, 256)
 
         with st.expander("🎭 AI Persona", expanded=False):
             persona = st.selectbox(
@@ -519,8 +516,7 @@ def render_sidebar():
             st.session_state.persona = persona
             st.session_state.system_prompt = PERSONAS[persona]
             with st.popover("✏️ Custom System Prompt"):
-                custom = st.text_area(
-                    "Edit", st.session_state.system_prompt, height=150)
+                custom = st.text_area("Edit", st.session_state.system_prompt, height=150)
                 if st.button("Apply"):
                     st.session_state.system_prompt = custom
                     st.session_state.persona = "Custom"
@@ -532,17 +528,11 @@ def render_sidebar():
             if st.session_state.messages:
                 c1, c2, c3 = st.columns(3)
                 with c1:
-                    st.download_button(
-                        "TXT", export_chat_txt(st.session_state.messages),
-                        f"kira_{datetime.now().strftime('%Y%m%d')}.txt", use_container_width=True)
+                    st.download_button("TXT", export_chat_txt(st.session_state.messages), f"kira_{datetime.now().strftime('%Y%m%d')}.txt", use_container_width=True)
                 with c2:
-                    st.download_button(
-                        "MD", export_chat_md(st.session_state.messages),
-                        f"kira_{datetime.now().strftime('%Y%m%d')}.md", use_container_width=True)
+                    st.download_button("MD", export_chat_md(st.session_state.messages), f"kira_{datetime.now().strftime('%Y%m%d')}.md", use_container_width=True)
                 with c3:
-                    st.download_button(
-                        "JSON", export_chat_json(st.session_state.messages),
-                        f"kira_{datetime.now().strftime('%Y%m%d')}.json", use_container_width=True)
+                    st.download_button("JSON", export_chat_json(st.session_state.messages), f"kira_{datetime.now().strftime('%Y%m%d')}.json", use_container_width=True)
             else:
                 st.info("Start a chat to export")
 
@@ -557,7 +547,9 @@ def render_sidebar():
         """, unsafe_allow_html=True)
 
     return api_key
- 
+
+
+                        
 
 # ──────────────────────────────────────────────────────────────────────────────
 # WELCOME
