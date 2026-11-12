@@ -474,7 +474,7 @@ def render_sidebar():
             st.session_state.voice_enabled = st.toggle("🔊 Auto Voice Output", value=st.session_state.voice_enabled)
             st.session_state.voice_mode = st.toggle("🎙️ Voice Input Mode", value=st.session_state.voice_mode)
 
-        with st.expander("🔑 API Configuration", expanded=True):
+                with st.expander("🔑 API Configuration", expanded=True):
             provider = st.selectbox(
                 "AI Provider",
                 list(MODEL_CONFIGS.keys()),
@@ -482,37 +482,36 @@ def render_sidebar():
             )
             st.session_state.api_provider = provider
             config = MODEL_CONFIGS[provider]
-            
-# Secrets-ல Key இருக்கான்னு செக் பண்றோம்
-try:
-    if provider == "Groq (Free)":
-        api_key = st.secrets["GROQ_API_KEY"]
-    elif provider == "Google Gemini (Free)":
-        api_key = st.secrets["GOOGLE_API_KEY"]
-    elif provider == "Hugging Face (Free)":
-        api_key = st.secrets["HF_API_KEY"]
-    st.success("✅ API Key loaded securely from server")
-except Exception:
-    # Secrets-ல இல்லைனா மட்டும் யூசர் கிட்ட கேட்கும்
-    api_key = st.text_input(
-        config['key_name'], type="password",
-        placeholder=f"Enter your {config['key_name']}...",
-        help=config["docs"]
-    )
-model = st.selectbox(
-    "Model", config["models"],
-    index=config["models"].index(st.session_state.model) if st.session_state.model in config["models"] else 0
-)
-st.session_state.model = model
-st.caption(f"📖 {config['docs']}")
-   
-with st.expander("🎛️ Model Parameters", expanded=False):
+
+            try:
+                if provider == "Groq (Free)":
+                    api_key = st.secrets["GROQ_API_KEY"]
+                elif provider == "Google Gemini (Free)":
+                    api_key = st.secrets["GOOGLE_API_KEY"]
+                elif provider == "Hugging Face (Free)":
+                    api_key = st.secrets["HF_API_KEY"]
+                st.success("✅ API Key loaded securely from server")
+            except Exception:
+                api_key = st.text_input(
+                    config['key_name'], type="password",
+                    placeholder=f"Enter your {config['key_name']}...",
+                    help=config["docs"]
+                )
+
+            model = st.selectbox(
+                "Model", config["models"],
+                index=config["models"].index(st.session_state.model) if st.session_state.model in config["models"] else 0
+            )
+            st.session_state.model = model
+            st.caption(f"📖 {config['docs']}")
+
+        with st.expander("🎛️ Model Parameters", expanded=False):
             st.session_state.temperature = st.slider(
                 "Temperature", 0.0, 2.0, st.session_state.temperature, 0.1)
             st.session_state.max_tokens = st.slider(
                 "Max Tokens", 256, 4096, st.session_state.max_tokens, 256)
 
-with st.expander("🎭 AI Persona", expanded=False):
+        with st.expander("🎭 AI Persona", expanded=False):
             persona = st.selectbox(
                 "Select Persona", list(PERSONAS.keys()),
                 index=list(PERSONAS.keys()).index(st.session_state.persona) if st.session_state.persona in PERSONAS else 0
@@ -520,40 +519,45 @@ with st.expander("🎭 AI Persona", expanded=False):
             st.session_state.persona = persona
             st.session_state.system_prompt = PERSONAS[persona]
             with st.popover("✏️ Custom System Prompt"):
-                custom = st.text_area("Edit", st.session_state.system_prompt, height=150)
+                custom = st.text_area(
+                    "Edit", st.session_state.system_prompt, height=150)
                 if st.button("Apply"):
                     st.session_state.system_prompt = custom
                     st.session_state.persona = "Custom"
                     st.success("Applied!")
 
-st.divider()
+        st.divider()
 
-with st.expander("📤 Export Chat", expanded=False):
+        with st.expander("📤 Export Chat", expanded=False):
             if st.session_state.messages:
                 c1, c2, c3 = st.columns(3)
                 with c1:
-                    st.download_button("TXT", export_chat_txt(st.session_state.messages),
-                                       f"kira_{datetime.now().strftime('%Y%m%d')}.txt", use_container_width=True)
+                    st.download_button(
+                        "TXT", export_chat_txt(st.session_state.messages),
+                        f"kira_{datetime.now().strftime('%Y%m%d')}.txt", use_container_width=True)
                 with c2:
-                    st.download_button("MD", export_chat_md(st.session_state.messages),
-                                       f"kira_{datetime.now().strftime('%Y%m%d')}.md", use_container_width=True)
+                    st.download_button(
+                        "MD", export_chat_md(st.session_state.messages),
+                        f"kira_{datetime.now().strftime('%Y%m%d')}.md", use_container_width=True)
                 with c3:
-                    st.download_button("JSON", export_chat_json(st.session_state.messages),
-                                       f"kira_{datetime.now().strftime('%Y%m%d')}.json", use_container_width=True)
+                    st.download_button(
+                        "JSON", export_chat_json(st.session_state.messages),
+                        f"kira_{datetime.now().strftime('%Y%m%d')}.json", use_container_width=True)
             else:
                 st.info("Start a chat to export")
 
-            st.divider()
-            total_chats =                 len(st.session_state.chat_history)
-            total_messages = sum(len(c["messages"]) for c in                  st.session_state.chat_history.values())
-            st.markdown(f"""
-<div style="text-align:center;font-size:0.75rem;opacity:0.5;">
+        st.divider()
+        total_chats = len(st.session_state.chat_history)
+        total_messages = sum(len(c["messages"]) for c in st.session_state.chat_history.values())
+        st.markdown(f"""
+        <div style="text-align:center;font-size:0.75rem;opacity:0.5;">
             💬 {total_chats} chats | 📝 {total_messages} messages<br>
             Built with ❤️ by Gokulakrishnan
         </div>
-        """, unsafe_allow_html=True)    
+        """, unsafe_allow_html=True)
 
-    return api_key  
+    return api_key
+                   
 
 # ──────────────────────────────────────────────────────────────────────────────
 # WELCOME
