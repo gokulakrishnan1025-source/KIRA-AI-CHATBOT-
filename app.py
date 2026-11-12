@@ -552,7 +552,7 @@ st.markdown(f"""
             Built with ❤️ by Gokulakrishnan
         </div>
 """, unsafe_allow_html=True) 
-   return api_key
+        return api_key
 
 # ──────────────────────────────────────────────────────────────────────────────
 # WELCOME
