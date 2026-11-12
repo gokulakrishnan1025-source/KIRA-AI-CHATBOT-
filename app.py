@@ -482,11 +482,23 @@ def render_sidebar():
             )
             st.session_state.api_provider = provider
             config = MODEL_CONFIGS[provider]
-            api_key = st.text_input(
-                config['key_name'], type="password",
-                placeholder=f"Enter your {config['key_name']}...",
-                help=config["docs"]
-            )
+            
+# Secrets-ல Key இருக்கான்னு செக் பண்றோம்
+try:
+    if provider == "Groq (Free)":
+        api_key = st.secrets["GROQ_API_KEY"]
+    elif provider == "Google Gemini (Free)":
+        api_key = st.secrets["GOOGLE_API_KEY"]
+    elif provider == "Hugging Face (Free)":
+        api_key = st.secrets["HF_API_KEY"]
+    st.success("✅ API Key loaded securely from server")
+except Exception:
+    # Secrets-ல இல்லைனா மட்டும் யூசர் கிட்ட கேட்கும்
+    api_key = st.text_input(
+        config['key_name'], type="password",
+        placeholder=f"Enter your {config['key_name']}...",
+        help=config["docs"]
+    )
             model = st.selectbox(
                 "Model", config["models"],
                 index=config["models"].index(st.session_state.model) if st.session_state.model in config["models"] else 0
