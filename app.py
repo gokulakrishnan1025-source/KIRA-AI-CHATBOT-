@@ -168,7 +168,7 @@ PERSONAS = {
 MODEL_CONFIGS = {
     "Groq (Free)": {
         "models": [
-            "llama-3.3-70b-versatile",
+            "openai/gpt-oss-120b",
             "llama-3.1-8b-instant",
             "gemma2-9b-it",
             "deepseek-r1-distill-llama-70b",
