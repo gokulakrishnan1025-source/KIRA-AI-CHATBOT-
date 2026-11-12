@@ -512,7 +512,7 @@ with st.expander("🎛️ Model Parameters", expanded=False):
             st.session_state.max_tokens = st.slider(
                 "Max Tokens", 256, 4096, st.session_state.max_tokens, 256)
 
-        with st.expander("🎭 AI Persona", expanded=False):
+with st.expander("🎭 AI Persona", expanded=False):
             persona = st.selectbox(
                 "Select Persona", list(PERSONAS.keys()),
                 index=list(PERSONAS.keys()).index(st.session_state.persona) if st.session_state.persona in PERSONAS else 0
