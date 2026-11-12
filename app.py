@@ -83,7 +83,7 @@ def init_session_state():
         "current_chat_id": None,
         "theme": "dark",
         "api_provider": "Groq (Free)",
-        "model": "llama-3.3-70b-versatile",
+        "model": "openai/gpt-oss-120b",
         "temperature": 0.7,
         "max_tokens": 2048,
         "system_prompt": "You are KIRA, a helpful, friendly, and intelligent AI assistant. You provide accurate, well-structured responses. When explaining code, use proper formatting with syntax highlighting.",
