@@ -500,12 +500,12 @@ except Exception:
         help=config["docs"]
     )
 model = st.selectbox(
-          "Model", config["models"],
-                index=config["models"].index(st.session_state.model) if st.session_state.model in config["models"] else 0
-            )
-            st.session_state.model = model
-            st.caption(f"📖 {config['docs']}")
-
+    "Model", config["models"],
+    index=config["models"].index(st.session_state.model) if st.session_state.model in config["models"] else 0
+)
+st.session_state.model = model
+st.caption(f"📖 {config['docs']}")
+        
         with st.expander("🎛️ Model Parameters", expanded=False):
             st.session_state.temperature = st.slider(
                 "Temperature", 0.0, 2.0, st.session_state.temperature, 0.1)
