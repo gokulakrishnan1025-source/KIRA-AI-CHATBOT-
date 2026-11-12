@@ -11,7 +11,7 @@ import streamlit.components.v1 as components
 import requests
 import json
 import time
-import base
+import base64
 from datetime import datetime
 
 # ──────────────────────────────────────────────────────────────────────────────
