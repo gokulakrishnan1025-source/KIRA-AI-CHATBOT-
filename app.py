@@ -543,16 +543,17 @@ with st.expander("📤 Export Chat", expanded=False):
             else:
                 st.info("Start a chat to export")
 
-st.divider()
-total_chats = len(st.session_state.chat_history)
-total_messages = sum(len(c["messages"]) for c in st.session_state.chat_history.values())
-st.markdown(f"""
+        st.divider()
+        total_chats =                 len(st.session_state.chat_history)
+        total_messages = sum(len(c["messages"]) for c in                  st.session_state.chat_history.values())
+        st.markdown(f"""
 <div style="text-align:center;font-size:0.75rem;opacity:0.5;">
             💬 {total_chats} chats | 📝 {total_messages} messages<br>
             Built with ❤️ by Gokulakrishnan
         </div>
-""", unsafe_allow_html=True) 
-        return api_key
+        """, unsafe_allow_html=True)    
+
+    return api_key
 
 # ──────────────────────────────────────────────────────────────────────────────
 # WELCOME
