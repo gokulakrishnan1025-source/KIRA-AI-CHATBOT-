@@ -543,7 +543,7 @@ with st.expander("📤 Export Chat", expanded=False):
             else:
                 st.info("Start a chat to export")
 
-st.divider()
+        st.divider()
 total_chats = len(st.session_state.chat_history)
 total_messages = sum(len(c["messages"]) for c in st.session_state.chat_history.values())
 st.markdown(f"""
