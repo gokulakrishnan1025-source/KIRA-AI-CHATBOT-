@@ -474,7 +474,7 @@ def render_sidebar():
             st.session_state.voice_enabled = st.toggle("🔊 Auto Voice Output", value=st.session_state.voice_enabled)
             st.session_state.voice_mode = st.toggle("🎙️ Voice Input Mode", value=st.session_state.voice_mode)
 
-                    with st.expander("🔑 API Configuration", expanded=True):
+            with st.expander("🔑 API Configuration", expanded=True):
             provider = st.selectbox(
                 "AI Provider",
                 list(MODEL_CONFIGS.keys()),
