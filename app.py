@@ -551,8 +551,8 @@ st.markdown(f"""
             💬 {total_chats} chats | 📝 {total_messages} messages<br>
             Built with ❤️ by Gokulakrishnan
         </div>
-""", unsafe_allow_html=True)
-           return api_key
+""", unsafe_allow_html=True) 
+ return api_key
 
 # ──────────────────────────────────────────────────────────────────────────────
 # WELCOME
