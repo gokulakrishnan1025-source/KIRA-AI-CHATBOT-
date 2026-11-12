@@ -526,7 +526,7 @@ with st.expander("🎭 AI Persona", expanded=False):
                     st.session_state.persona = "Custom"
                     st.success("Applied!")
 
-        st.divider()
+st.divider()
 
         with st.expander("📤 Export Chat", expanded=False):
             if st.session_state.messages:
