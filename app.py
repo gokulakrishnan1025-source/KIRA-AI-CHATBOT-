@@ -528,7 +528,7 @@ with st.expander("🎭 AI Persona", expanded=False):
 
 st.divider()
 
-        with st.expander("📤 Export Chat", expanded=False):
+with st.expander("📤 Export Chat", expanded=False):
             if st.session_state.messages:
                 c1, c2, c3 = st.columns(3)
                 with c1:
