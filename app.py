@@ -646,8 +646,6 @@ def render_chat_interface(api_key):
         else:
             st.warning("🖼️ Image analysis works with **Gemini** provider only.")
 
-    for i, message in enumerate(st.session_state.messages):
-        with st.chat_message(message["role"], avatar="👤" if message["role"] == "user" else "🤖"):
             st.markdown(message["content"])
             if message["role"] == "assistant":
                 c1, c2, c3 = st.columns([0.2, 0.2, 0.6])
