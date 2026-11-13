@@ -597,10 +597,47 @@ def render_welcome():
                 st.session_state.show_welcome = False
                 st.rerun()
 
-# ──────────────────────────────────────────────────────────────────────────────
+
+ # ──────────────────────────────────────────────────────────────────────────────
 # CHAT INTERFACE
 # ──────────────────────────────────────────────────────────────────────────────
 def render_chat_interface(api_key):
+    # 👇 இங்கே தான் நான் கொடுத்த புது Dropdown Code ஆரம்பிக்கணும் 👇
+    col1, col2 = st.columns(2)
+    with col1:
+        provider = st.selectbox(
+            "AI Provider",
+            list(MODEL_CONFIGS.keys()),
+            index=list(MODEL_CONFIGS.keys()).index(st.session_state.api_provider),
+            key="main_provider"
+        )
+        st.session_state.api_provider = provider
+    with col2:
+        config = MODEL_CONFIGS[provider]
+        model = st.selectbox(
+            "Model",
+            config["models"],
+            index=config["models"].index(st.session_state.model) if st.session_state.model in config["models"] else 0,
+            key="main_model"
+        )
+        st.session_state.model = model
+    
+    st.divider()
+    # 👆 புது Dropdown Code முடிஞ்சது 👆
+
+    # 👇 இதுக்கு கீழே தான் உங்க பழைய Code தொடரும் (இதை டெலீட் பண்ண வேண்டாம்) 👇
+    if st.session_state.uploaded_file_content:
+        st.info("📄 File loaded in context. Ask questions about it!")
+    
+    if st.session_state.uploaded_image_data:
+        if st.session_state.api_provider == "Google Gemini (Free)":
+            st.info("🖼️ Image loaded — Gemini will analyze it.")
+        else:
+            st.warning("🖼️ Image analysis works with **Gemini** provider only.")
+
+    for i, message in enumerate(st.session_state.messages):
+        with st.chat_message(message["role"], avatar="👤" if message["role"] == "user" else "🤖"):
+            # ... (உங்க பழைய Code அப்படியே தொடரும்)
     if st.session_state.uploaded_file_content:
         st.info("📄 File loaded in context. Ask questions about it!")
     if st.session_state.uploaded_image_data:
