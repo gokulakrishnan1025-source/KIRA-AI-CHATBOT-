@@ -635,28 +635,19 @@ def render_chat_interface(api_key):
         else:
             st.warning("🖼️ Image analysis works with **Gemini** provider only.")
 
-    for i, message in enumerate(st.session_state.messages):
-        with st.chat_message(message["role"], avatar="👤" if message["role"] == "user" else "🤖"):
-            # ... (உங்க பழைய Code அப்படியே தொடரும்)
-    if st.session_state.uploaded_file_content:
-        st.info("📄 File loaded in context. Ask questions about it!")
-    if st.session_state.uploaded_image_data:
-        if st.session_state.api_provider == "Google Gemini (Free)":
-            st.info("🖼️ Image loaded — Gemini will analyze it.")
-        else:
-            st.warning("🖼️ Image analysis works with **Gemini** provider only.")
-
-            st.markdown(message["content"])
+        for i, message in enumerate(st.session_state.messages):
+            with st.chat_message(message["role"], avatar="👤" if message["role"] == "user" else "🤖"):
+                                                                              st.markdown(message["content"])
             if message["role"] == "assistant":
                 c1, c2, c3 = st.columns([0.2, 0.2, 0.6])
                 with c1:
-                    render_copy_button(message["content"], f"cp_{i}")
+                      render_copy_button(message["content"], f"cp_{i}")
                 with c2:
                     render_speak_button(message["content"], f"sp_{i}")
                 with c3:
                     if st.button("🔄 Regenerate", key=f"regen_{i}"):
                         st.session_state.regenerate_index = i
-                        st.rerun()
+                        st.rerun()                 
 
     # Handle regenerate
     if st.session_state.regenerate_index is not None:
