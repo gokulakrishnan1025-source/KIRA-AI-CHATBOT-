@@ -715,7 +715,7 @@ def render_chat_interface(api_key):
                 full = ""
                 try:
                     for chunk in generate_response_stream(
-                        st.session_state.messages[:-1],
+                        st.session_state.messages,
                         api_key, st.session_state.api_provider, st.session_state.model,
                         st.session_state.temperature, st.session_state.max_tokens,
                         file_context=st.session_state.uploaded_file_content,
