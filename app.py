@@ -735,7 +735,7 @@ def render_chat_interface(api_key):
             st.session_state.messages.append({"role": "assistant", "content": full})
             save_current_chat()
 
-        st.rerun()
+        #st.rerun()
 
 # ──────────────────────────────────────────────────────────────────────────────
 # IMAGE GEN TAB
