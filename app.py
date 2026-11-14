@@ -210,7 +210,8 @@ def transcribe_audio(audio_bytes, api_key, provider):
         if not api_key:
             return None, "Gemini API key required."
         try:
-            url = f"https://googleapis.com{api_key}"
+            url= "https://generativelanguage." + f"://googleapis.com{api_key}"
+
             payload = {
                 "contents": [{
                     "parts": [
@@ -231,7 +232,8 @@ def transcribe_audio(audio_bytes, api_key, provider):
     groq_key = api_key if provider == "Groq (Free)" else st.secrets.get("GROQ_API_KEY", "")
     if groq_key:
         try:
-            url = "https://groq.com"
+            url = "https://api.groq." + "com/openai/v1/audio/transcriptions"
+
             headers = {"Authorization": f"Bearer {groq_key}"}
             files = {"file": ("audio.wav", audio_bytes, "audio/wav")}
             data = {"model": "whisper-large-v3-turbo", "language": "en"}
