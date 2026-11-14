@@ -371,16 +371,18 @@ def generate_response_stream(messages, api_key, provider, model, temperature, ma
                 prompt += f"<|assistant|>\n{msg['content']}\n"
         prompt += "<|assistant|>\n"
         payload = {
-            "inputs": prompt,
-            "parameters": {"temperature": temperature, "max_new_tokens": max_tokens, "return_full_text": False}
-        }
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": temperature,
+            "max_tokens": max_tokens
+        }.  
         try:
-            api_url = f"https://api-inference.huggingface.co/models/{model}"
+            api_url = "https://huggingface.co"
             response = requests.post(api_url, headers=headers, json=payload, timeout=60)
             response.raise_for_status()
             data = response.json()
-            if isinstance(data, list) and len(data) > 0:
-                text = data[0].get("generated_text", "")
+            if "choices" in data and len(data["choices"]) > 0:
+                text = data["choices"][0]["message"].get("content", "")
                 for i in range(0, len(text), 4):
                     yield text[i:i+4]
                     time.sleep(0.01)
@@ -388,6 +390,7 @@ def generate_response_stream(messages, api_key, provider, model, temperature, ma
                 yield "⚠️ No response from Hugging Face."
         except Exception as e:
             yield f"❌ Error: {str(e)}\n\n💡 Get key at huggingface.co/settings/tokens"
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # IMAGE GENERATION
