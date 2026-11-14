@@ -493,8 +493,10 @@ def render_sidebar():
                     api_key = st.secrets["GROQ_API_KEY"]
                 elif provider == "Google Gemini (Free)":
                     api_key = st.secrets["GOOGLE_API_KEY"]
-                elif provider == "Hugging Face (Free)":
-                    api_key = st.secrets["HF_API_KEY"]
+            elif provider == "OpenRouter (Free)":
+                api_key = st.secrets["OPENROUTER_API_KEY"]
+                
+
                 st.success("✅ API Key loaded securely from server")
             except Exception:
                 api_key = st.text_input(
