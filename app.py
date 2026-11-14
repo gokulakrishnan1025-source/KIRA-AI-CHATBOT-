@@ -640,7 +640,7 @@ def render_chat_interface(api_key):
         st.session_state.model = model
 
         if st.button("🗑️ Clear Chat", use_container_width=True):
-        st.session_state.messages = []
+        st.session_state.messages =[]
         st.session_state.show_welcome = True
         st.session_state.audio_key = st.session_state.get("audio_key", 0) + 1
         st.rerun()
