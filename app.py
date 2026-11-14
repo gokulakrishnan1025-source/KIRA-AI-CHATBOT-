@@ -621,7 +621,11 @@ def render_chat_interface(api_key):
             key="main_provider"
         )
         st.session_state.api_provider = provider
+        key_name = MODEL_CONFIGS[provider]["key_name"]
+        if key_name in st.secrets:
+            api_key = st.secrets[key_name]
     with col2:
+
         config = MODEL_CONFIGS[provider]
         model = st.selectbox(
             "Model",
