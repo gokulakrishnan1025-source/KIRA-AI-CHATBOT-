@@ -363,7 +363,7 @@ def generate_response_stream(messages, api_key, provider, model, temperature, ma
         except Exception as e:
             yield f"❌ Error: {str(e)}\n\n💡 Get key at aistudio.google.com/app/apikey"
 
-        elif provider == "OpenRouter (Free)":
+    elif provider == "OpenRouter (Free)":
         headers = {"Authorization": f"Bearer {api_key}"}
         prompt = f"<|system|>\n{system_content}\n"
         for msg in messages:
