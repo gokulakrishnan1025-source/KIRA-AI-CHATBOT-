@@ -688,7 +688,7 @@ def render_chat_interface(api_key):
             st.rerun()
 
     # Voice input
-    if st.session_state.voice_mode:
+    if True:
         st.markdown("##### 🎙️ Voice Input")
         audio = st.audio_input("Record", key="voice_rec", label_visibility="collapsed")
         if audio:
