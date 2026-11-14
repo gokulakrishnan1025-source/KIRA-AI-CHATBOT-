@@ -630,8 +630,14 @@ def render_chat_interface(api_key):
             key="main_model"
         )
         st.session_state.model = model
-    
+
+    if st.button("🗑️ Clear Chat",                 use_container_width=True):
+        st.session_state.messages = []
+        st.session_state.show_welcome = True
+        st.rerun()
+
     st.divider()
+
     # 👆 புது Dropdown Code முடிஞ்சது 👆
 
     # 👇 இதுக்கு கீழே தான் உங்க பழைய Code தொடரும் (இதை டெலீட் பண்ண வேண்டாம்) 👇
