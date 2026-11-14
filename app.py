@@ -377,7 +377,7 @@ def generate_response_stream(messages, api_key, provider, model, temperature, ma
             "max_tokens": max_tokens
         }  
         try:
-            api_url = "https://huggingface.co"
+            api_url = "https://huggingface.co" 
 
             response = requests.post(api_url, headers=headers, json=payload, timeout=60)
             response.raise_for_status()
