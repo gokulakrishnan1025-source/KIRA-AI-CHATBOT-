@@ -203,26 +203,14 @@ MODEL_CONFIGS = {
 # VOICE / AUDIO HELPERS
 # ──────────────────────────────────────────────────────────────────────────────
 def transcribe_audio(audio_bytes, api_key, provider):
-    if not api_key:
-        return None, "API key required. Add it in the sidebar."
     if not audio_bytes:
         return None, "No audio recorded."
 
-    if provider == "Groq (Free)":
+    if provider == "Google Gemini (Free)":
+        if not api_key:
+            return None, "Gemini API key required."
         try:
-            url = "https://api.groq.com/openai/v1/audio/transcriptions"
-            headers = {"Authorization": f"Bearer {api_key}"}
-            files = {"file": ("audio.wav", audio_bytes, "audio/wav")}
-            data = {"model": "whisper-large-v3-turbo"}
-            r = requests.post(url, headers=headers, files=files, data=data, timeout=30)
-            r.raise_for_status()
-            return r.json().get("text", "").strip(), None
-        except Exception as e:
-            return None, f"Transcription failed: {e}"
-
-    elif provider == "Google Gemini (Free)":
-        try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+            url = f"https://googleapis.com{api_key}"
             payload = {
                 "contents": [{
                     "parts": [
@@ -240,7 +228,21 @@ def transcribe_audio(audio_bytes, api_key, provider):
         except Exception as e:
             return None, f"Transcription failed: {e}"
 
-    return None, "Voice input works with Groq or Gemini. Switch in sidebar."
+    groq_key = api_key if provider == "Groq (Free)" else st.secrets.get("GROQ_API_KEY", "")
+    if groq_key:
+        try:
+            url = "https://groq.com"
+            headers = {"Authorization": f"Bearer {groq_key}"}
+            files = {"file": ("audio.wav", audio_bytes, "audio/wav")}
+            data = {"model": "whisper-large-v3-turbo", "language": "en"}
+            r = requests.post(url, headers=headers, files=files, data=data, timeout=30)
+            r.raise_for_status()
+            return r.json().get("text", "").strip(), None
+        except Exception as e:
+            return None, f"Transcription failed: {e}"
+
+    return None, "Groq API key required for voice input."
+
 
 
 def render_speak_button(text, key):
