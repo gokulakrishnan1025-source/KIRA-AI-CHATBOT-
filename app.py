@@ -187,10 +187,11 @@ MODEL_CONFIGS = {
     },
     "OpenRouter (Free)": {
         "models": [
-            "meta-llama/llama-3.1-8b-instruct:free",
-            "google/gemma-2-9b-it:free",
-            "mistralai/mistral-7b-instruct:free"
-        ], 
+            "openrouter/free",
+            "meta-llama/llama-3.3-70b-instruct:free",
+            "google/gemma-3-27b-it:free"
+        ],
+
         "key_name": "OPENROUTER_API_KEY",
         "docs": "Get free API key at: openrouter.ai/keys"
 
