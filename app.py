@@ -639,10 +639,12 @@ def render_chat_interface(api_key):
         )
         st.session_state.model = model
 
-    if st.button("🗑️ Clear Chat",                 use_container_width=True):
+        if st.button("🗑️ Clear Chat", use_container_width=True):
         st.session_state.messages = []
         st.session_state.show_welcome = True
+        st.session_state.audio_key = st.session_state.get("audio_key", 0) + 1
         st.rerun()
+
 
     st.divider()
 
@@ -704,7 +706,8 @@ def render_chat_interface(api_key):
     # Voice input
     if True:
         st.markdown("##### 🎙️ Voice Input")
-        audio = st.audio_input("Record", key="voice_rec", label_visibility="collapsed")
+        audio = st.audio_input("Record your voice", label_visibility="collapsed", key=f"voice_{st.session_state.get('audio_key', 0)}")
+ 
         if audio:
             if st.button("📤 Send Voice Message", type="primary", use_container_width=True):
                 with st.spinner("Transcribing..."):
