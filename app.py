@@ -185,15 +185,17 @@ MODEL_CONFIGS = {
         "key_name": "GOOGLE_API_KEY",
         "docs": "Get free API key at: aistudio.google.com/app/apikey"
     },
-    "Hugging Face (Free)": {
+    "OpenRouter (Free)": {
         "models": [
-            "mistralai/Mistral-7B-Instruct-v0.3",
-            "meta-llama/Llama-3.1-8B-Instruct",
-            "microsoft/Phi-3-mini-4k-instruct",
+            "meta-llama/llama-3.1-8b-instruct:free",
+            "google/gemma-2-9b-it:free",
+            "mistralai/mistral-7b-instruct:free"
         ],
-        "key_name": "HF_API_KEY",
-        "docs": "Get free API key at: huggingface.co/settings/tokens"
-    }
+        "key_name": "OPENROUTER_API_KEY",
+        "docs": "Get free API key at: openrouter.ai/keys"
+
+    },
+
 }
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -361,7 +363,7 @@ def generate_response_stream(messages, api_key, provider, model, temperature, ma
         except Exception as e:
             yield f"❌ Error: {str(e)}\n\n💡 Get key at aistudio.google.com/app/apikey"
 
-    elif provider == "Hugging Face (Free)":
+        elif provider == "OpenRouter (Free)":
         headers = {"Authorization": f"Bearer {api_key}"}
         prompt = f"<|system|>\n{system_content}\n"
         for msg in messages:
@@ -377,9 +379,7 @@ def generate_response_stream(messages, api_key, provider, model, temperature, ma
             "max_tokens": max_tokens
         }  
         try:
-            api_url = "https://router." + "huggingface.co/v1/chat/completions"
-  
-
+            api_url = "https://openrouter." + "ai/api/v1/chat/completions"
             response = requests.post(api_url, headers=headers, json=payload, timeout=60)
             response.raise_for_status()
             data = response.json()
@@ -389,9 +389,10 @@ def generate_response_stream(messages, api_key, provider, model, temperature, ma
                     yield text[i:i+4]
                     time.sleep(0.01)
             else:
-                yield "⚠️ No response from Hugging Face."
+                yield "⚠️ No response from OpenRouter."
         except Exception as e:
-            yield f"❌ Error: {str(e)}\n\n💡 Get key at huggingface.co/settings/tokens"
+            yield f"❌ Error: {str(e)}\n\n💡 Get key at openrouter.ai/keys"
+
 
 
 # ──────────────────────────────────────────────────────────────────────────────
