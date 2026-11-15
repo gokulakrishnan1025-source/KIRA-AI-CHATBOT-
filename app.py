@@ -719,7 +719,7 @@ def render_chat_interface(api_key):
                     st.rerun()
 
     # Chat input
-    prompt = st.chat_input("💬 Type your message...")
+    prompt = st.chat_input("💬 ASK KIRA ANYTHING...")
     if st.session_state.pending_prompt:
         prompt = st.session_state.pending_prompt
         st.session_state.pending_prompt = None
@@ -870,16 +870,16 @@ def render_about():
         | Field | Details |
         |-------|---------|
         | **Project** | KIRA AI Chatbot v2.0 |
-        | **Student** | Gokulakrishnan |
+        | **Student** | GOKULAKRISHNAN.P |
         | **Register No** | SPC26DSU005 |
-        | **Department** | AI & Machine Learning |
+        | **Department** | ARTIFICIAL INTELLIGENCE AND DATA SCIENCE (AI&DS)|
         | **Institution** | St. Peter's Institute of Higher Education and Research |
         | **Guide** | Dr. J. Suganthi Vinodhini |
         | **Year** | 2026–2027 |
-
+        | **kIRA** | KNOWLEDGE-BASED INTELLIGENT REAL-TIME ASSISTANT |
         ### 🛠️ Tech Stack
         - **Frontend**: Streamlit (Python)
-        - **AI**: Groq, Google Gemini, Hugging Face
+        - **AI**: Groq, Google Gemini, openrouter 
         - **Image Gen**: Pollinations AI
         - **Voice**: Groq Whisper / Gemini Audio + Web Speech API
         - **Hosting**: Streamlit Cloud (Free)
@@ -906,7 +906,7 @@ def render_about():
         | 💻 Code Highlighting | ✅ |
 
         ### 🔗 Live App
-        [smart-ai-chatbot-kira.streamlit.app](https://smart-ai-chatbot-kira.streamlit.app)
+        [ASK-KIRA-NEXUS.streamlit.app](https://ask-kira-nexus.streamlit.app/)
         """)
     st.divider()
     st.markdown("""
