@@ -55,8 +55,6 @@ def inject_custom_css():
         .status-online { background: rgba(16,185,129,0.15); color: #10b981; }
         #MainMenu { visibility: hidden; }
         footer { visibility: hidden; }
-        header { background: transparent !important; }
-        [data-testid="stToolbar"] { visibility: hidden; }
         </style>
         """
     else:
@@ -68,11 +66,9 @@ def inject_custom_css():
         .stChatMessage { border-radius: 16px !important; margin-bottom: 12px !important; }
         .stButton > button { border-radius: 12px !important; font-weight: 500 !important; }
         .welcome-card { background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(147,51,234,0.08)); border: 1px solid rgba(0,0,0,0.08); border-radius: 20px; padding: 2rem; text-align: center; margin-bottom: 2rem; }
-                #MainMenu { visibility: hidden; }
+               #MainMenu { visibility: hidden; }
         footer { visibility: hidden; }
-        header { background: transparent !important; }
-        [data-testid="stToolbar"] { visibility: hidden; }
-        </style>
+        </style>       
         """
     st.markdown(css, unsafe_allow_html=True)
 
