@@ -495,8 +495,8 @@ def render_sidebar():
             try:
                 if provider == "Groq (Free)":
                     api_key = st.secrets["GROQ_API_KEY"]
-                elif provider == "Google Gemini (Free)":
-                    api_key = st.secrets["GOOGLE_API_KEY"]
+                elif provider == "Gemini (Free)":
+                    api_key = st.secrets["Gemini_API_KEY"]
                 elif provider == "OpenRouter (Free)":
                     api_key = st.secrets["OPENROUTER_API_KEY"]
                 
