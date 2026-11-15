@@ -496,12 +496,10 @@ def render_sidebar():
             try:
                 if provider == "Groq (Free)":
                     api_key = st.secrets["GROQ_API_KEY"]
-                elif provider in ["Gemini (Free)", "Google Gemini (Free)"]:
-                    api_key = st.secrets["Gemini_API_KEY"]
+                elif provider == "Google Gemini (Free)":
+                    api_key = st.secrets["GEMINI_API_KEY"]
                 elif provider == "OpenRouter (Free)":
                     api_key = st.secrets["OPENROUTER_API_KEY"]
-                else:
-                    raise KeyError("Provider not in secrets")
 
                 st.success("✅ API Key loaded securely from server")
             except Exception:
